@@ -5,115 +5,128 @@
 int price[7] = { 250 , 300 , 20 , 120 , 150 , 160 , 50 };
 int mealTaxPrices[7];
 int adultNumber,childNumber;
-int usrScore = 0,compScore = 0;
-void checkOptions(int usr,int comp){
-	// 1 = scissor 2= paper 3=rock
-	if(usr == comp){
-		printf(" --------------------\n");
-		printf("|    Its a tie       |\n");
-		printf(" --------------------\n");
-	}
-	else if(usr == 1){
-		if(comp == 2){
-			printf(" --------------------\n");
-			printf("|      You Won :)    |\n");
-			printf("| You : Scissor      |\n");
-			printf("| Computer : Paper   |\n");
-			printf(" --------------------\n");
-			usrScore++;
 
-		}
-		else {
-			printf(" --------------------\n");
-			printf("|     You Lose :(    |\n");
-			printf("| You : Scissor      |\n");
-			printf("| Computer : Rock    |\n");
-			printf(" --------------------\n");
+struct library {
+    char book_name[20];
+    char author[20];
+    int pages;
+    float price;
+};
 
-			compScore++;
-		}
-	}
-	else if(usr == 2){
-		if(comp == 1){
-			printf(" --------------------\n");
-			printf("|      You Lose :(   |\n");
-			printf("| You : Paper        |\n");
-			printf("| Computer : Scissor |\n");
-			printf(" --------------------\n");
-		    compScore++;
-		}
-		else {
-			printf(" --------------------\n");
-			printf("|     You Won :)     |\n");
-			printf("| You : Paper        |\n");
-			printf("| Computer : Rock    |\n");
-			printf(" --------------------\n");
 
-			usrScore++;
-		}
-	}
-	else if(usr == 3){
-		if(comp == 1){
-			printf(" --------------------\n");
-			printf("|      You Won :)    |\n");
-			printf("| You : Rock        |\n");
-			printf("| Computer : Scissor |\n");
-			printf(" --------------------\n");
-			usrScore++;
-		}
-		else {
-			printf(" --------------------\n");
-			printf("|     You Lose :(    |\n");
-			printf("| You : Rock         |\n");
-			printf("| Computer : Paper    |\n");
-			printf(" --------------------\n");
+void mainlibrary()
+{
 
-			compScore++;
-		}
-	}
-	else if(usr == 4){
-		printf(" --------------------\n");
-		if(usrScore > compScore)
-		printf("|      You Won :)    |\n");
-		else if (usrScore < compScore)
-		printf("|     You Lose :(    |\n");
-		else
-		printf("|      Its a tie     |\n");
-		printf("|     Final Score    |\n");
-		printf("| You : %d            |\n",usrScore);
-		printf("| Computer: %d        |\n",compScore);
-		printf(" --------------------\n");
-		printf("\a");
-	}
-	else {
-		Beep(750,500);
-		printf("\n Invalid Option");
-	}
+    struct library lib[100];
+
+    char ar_nm[30], bk_nm[30];
+
+    int i, input, count;
+
+    i = input = count = 0;
+
+    while (input != 5) {
+
+        printf("\n\n*************"
+               "WELCOME TO E-LIBRARY "
+               "*************\n");
+        printf("\n\n1. Add book infor"
+               "mation\n2. Display "
+               "book information\n");
+        printf("3. List all books of "
+               "given author\n");
+        printf(
+            "4. List the count of book"
+            "s in the library\n");
+        printf("5. Exit");
+
+        printf("\n\nEnter one of "
+               "the above: ");
+        scanf("%d", &input);
+
+        switch (input) {
+
+        case 1:
+
+            printf("Enter Book Name = ");
+            scanf("%s", lib[i].book_name);
+
+            printf("Enter Author Name = ");
+            scanf("%s", lib[i].author);
+
+            printf("Enter Pages = ");
+            scanf("%d", &lib[i].pages);
+
+            printf("Enter Price = ");
+            scanf("%f", &lib[i].price);
+            count++;
+
+            break;
+
+
+        case 2:
+            printf("You have entered"
+                   " the following "
+                   "information\n");
+            for (i = 0; i < count; i++) {
+
+                printf("book name = %s",
+                       lib[i].book_name);
+
+                printf("\t author name = %s",
+                       lib[i].author);
+
+                printf("\t  pages = %d",
+                       lib[i].pages);
+
+                printf("\t  price = %f",
+                       lib[i].price);
+            }
+            break;
+
+
+        case 3:
+            printf("Enter Author Name : ");
+            scanf("%s", ar_nm);
+            for (i = 0; i < count; i++) {
+
+                if (strcmp(ar_nm,
+                           lib[i].author)== 0)
+                   {
+					        printf("book name = %s",
+                       lib[i].book_name);
+
+                printf("\t author name = %s",
+                       lib[i].author);
+
+                printf("\t  pages = %d",
+                       lib[i].pages);
+
+                printf("\t  price = %f",
+                       lib[i].price);
+            }
+
+            }
+            break;
+
+
+        case 4:
+            printf("\n No of books in "
+                   "library : %d",
+                   count);
+            break;
+        case 5:
+          printf("\nTHANKYOU FOR USING E-LIBRARY:)");
+        }
+    }
 
 }
-void mainrockpaperscissors() {
-int userChoice,compChoice;
-srand(time(0));
-printf("\t\t\t\t==========*Welcome to Rock, Paper & Scissor Game*==========");
-while(userChoice != 4){
-printf("\nPlease select the option: ");
-printf("\n1.Scissor");
-printf("\n2.Paper");
-printf("\n3.Rock");
-printf("\n4.Quit\n");
-scanf("%d",&userChoice);
 
-compChoice = (rand() % 3) + 1;   // If random numbers are generated with rand() without first calling srand(), 
-				//your program will create the same sequence of numbers each time it runs.
-checkOptions(userChoice,compChoice);
-printf("THANKYOU FOR PLAYING :)");
-}
-}
 void mainbankingsystem()
- { int pin=1234,option,enteredPin,count=0,amount=1; float balance=5000; 
+ { int pin=1234,option,enteredPin,count=0,amount=1; float balance=5000;
  int continueTransaction=1;
-  time_t now; time(&now); 
- printf("\n"); printf("\t\t\t\t\t %s",ctime(&now)); 
+  time_t now; time(&now);
+ printf("\n"); printf("\t\t\t\t\t %s",ctime(&now));
  printf("\n\t\t\t=======================Welcome to ATM=======================");
 
 while(pin != enteredPin){
@@ -161,11 +174,11 @@ switch(option){
     printf("\n\t\t You have deposited Rs.%d  your new balance is Rs.%f",amount,balance);
     amount=1;
     break;
-    
+
     case 3:
     printf("\n\t\t Your balance is Rs.%f",balance);
     break;
-    
+
     default:
     Beep(610,320);
     printf("\n\t\t Invalid option!!");
@@ -313,32 +326,27 @@ int orderForChildren()
 }
 
 
-
-
-
-
-
 int main()
 {
 	int abc;
 	char ch;
 	printf("Hello! WELCOME TO OUR MINI PROJECT\n");
 	do{
-		printf("PRESS 1 TO PLAY ROCK-PAPER-SCISSORS\nPRESS 2 FOR ATM BANKING\nPRESS 3 FOR RESTURANT BILLING\n");
+		printf("PRESS 1 FOR LIBRARY MANAGEMENT SYSTEM\nPRESS 2 FOR ATM BANKING\nPRESS 3 FOR RESTURANT BILLING\n");
 		scanf("%d",&abc);
 		if(abc==1)
 		{
-			mainrockpaperscissors();
-			
+			mainlibrary();
+
 		}
 		else if(abc==2)
 		{
 			mainbankingsystem();
-			
+
 		}
 		else if(abc==3)
 		{
-		
+
     		char response = 'y';
 			printMeals();
     		while(response == 'y'|| response == 'Y')
@@ -357,24 +365,18 @@ int main()
 
  			printf("\n      ******************** THANK YOU FOR COMING  *************************\n");
  			printf("\20**********************   PLEASE VISIT US NEXT TIME  **************************\20 \n");
- 			
+
 		}
 		else
 		{
 			printf("\nInvalid option");
 			Beep(750,500);
 		}
-		
+
 		printf("\nWOULD YOU LIKE TO GO BACK TO MENU(y/n)?\n");
 		scanf(" %c",&ch);
 	}
 	while(ch=='y');
 	return 0;
 }
-		
-	
- 
-    
-
-
        
